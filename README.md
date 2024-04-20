@@ -1,9 +1,17 @@
-# Retro Film Date
+# [RetroFilmDate](https://www.cjvillarreal.com/RetroFilmDate/)
 
-To Future Chris: locally this repo is "SnapJs". you're welcome - Past Chris
+![Site Preview](site_prev.png)
 
-"The people yern for the before times"
+RetroFilmDate brings back the glow date stamp of old cameras:
 
-Using this to add a disposable film like date stamp to jpegs from CampSnap Camera.
+![Site Preview](date_stamp.png)
 
-Examples TBD
+
+```bash
+npm run dev: Start the development server.
+npm run lint: Run ESLint to lint your code.
+npm run build: Build the app for production.
+npm run deploy: Deploy the app to your hosting provider.
+```
+
+Note: Future Chris, You named this SNAPJS locally. You're Welcome - Past Chris

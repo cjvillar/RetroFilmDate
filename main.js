@@ -1,6 +1,6 @@
 import "./style.css";
-
 import { createCanvas, loadImage } from "canvas";
+
 
 async function handleImageUpload(event) {
   const file = event.target.files[0];
