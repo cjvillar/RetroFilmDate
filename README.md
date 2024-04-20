@@ -1,7 +1,7 @@
 # [RetroFilmDate](https://www.cjvillarreal.com/RetroFilmDate/)
 
 
-<img src="site_prev.png" alt="prev of site" width="300" height="200">
+<img src="site_prev.png" alt="prev of site" width="430" height="472">
 
 
 RetroFilmDate brings back the glow date stamp of old cameras:
