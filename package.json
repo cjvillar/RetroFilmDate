@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "canvas": "^2.11.2",
+    "gh-pages": "^6.1.1",
     "prettier": "^3.2.5"
   },
   "devDependencies": {
@@ -9,6 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "prettier --write ."
+    "lint": "prettier --write .",
+    "deploy": "gh-pages -d build"
   }
 }
