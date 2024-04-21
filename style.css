@@ -40,11 +40,8 @@ h1 {
   line-height: 1.1;
 }
 
-/* set initial height and width to 96x96 */
-
 img {
-  width: 90px;
-  height: 90px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 /* if image is bigger, set it to 1000x1000 */
@@ -85,9 +82,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
