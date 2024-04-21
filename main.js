@@ -1,7 +1,6 @@
 import "./style.css";
 import { createCanvas, loadImage } from "canvas";
 
-
 async function handleImageUpload(event) {
   const file = event.target.files[0];
 
@@ -38,14 +37,11 @@ async function addTimestamp(imageDataUrl, newDate, selectedFont) {
 
   const ctx = canvas.getContext("2d");
 
-
-  const font = new FontFace("SelectedFont", `url(${selectedFont})`); 
+  const font = new FontFace("SelectedFont", `url(${selectedFont})`);
   await font.load();
   document.fonts.add(font);
 
-
   ctx.drawImage(image, 0, 0, image.width, image.height);
-
 
   // set font for text
   ctx.font = "70px SelectedFont"; // Use the dynamically loaded font here
@@ -67,7 +63,6 @@ async function addTimestamp(imageDataUrl, newDate, selectedFont) {
   ctx.shadowColor = "#ff1e0a";
   ctx.shadowBlur = 10;
 
-
   ctx.fillText(formattedDate, canvas.width - 50, canvas.height - 50);
 
   // reset shadow
@@ -78,7 +73,7 @@ async function addTimestamp(imageDataUrl, newDate, selectedFont) {
 
   return dataUrl;
 }
-  
+
 function initializeComponent() {
   const template = `
         <div>
@@ -102,9 +97,8 @@ function initializeComponent() {
   document
     .querySelector("#imageInput")
     .addEventListener("change", handleImageUpload);
-    
 
-//set initial value for font selector
+  //set initial value for font selector
   const defaultFont = "./fonts/alarmClock.ttf"; //default font
   const fontSelector = document.querySelector("#fontSelector");
   for (let i = 0; i < fontSelector.options.length; i++) {
@@ -114,42 +108,46 @@ function initializeComponent() {
     }
   }
 
-//load logo image prev with default font
-    const imagePreview = document.querySelector("#imagePreview").src;
-    const newDate = new Date().toISOString().split("T")[0];
-    addTimestamp(imagePreview, newDate, defaultFont).then((modifiedImage) => {
-      document.querySelector("#imagePreview").src = modifiedImage;
-    });
-
-  
-//   document.querySelector("#fontSelector").addEventListener("change", () => {
-
-//     //reapply timestamp with the selected font
-//     const fontSelector = document.querySelector("#fontSelector");
-//     let selectedFont = fontSelector.options[fontSelector.selectedIndex].value;
-//     const imagePreview = document.querySelector("#imagePreview").src;
-//     const newDate = new Date().toISOString().split("T")[0];
-
-//     addTimestamp(imagePreview, newDate, selectedFont).then((modifiedImage) => {
-//       document.querySelector("#imagePreview").src = modifiedImage;
-//     });
-//   });
-
-
-// Event listener for font selection change
-document.querySelector("#fontSelector").addEventListener("change", async () => {
-    const fontSelector = document.querySelector("#fontSelector");
-    const selectedFont = fontSelector.options[fontSelector.selectedIndex].value;
-    const imagePreview = document.querySelector("#imagePreview");
-  
-    // Reapply timestamp with the selected font
-    const newDate = new Date().toISOString().split("T")[0];
-    const modifiedImage = await addTimestamp(imagePreview.src, newDate, selectedFont);
-  
-    // Update image preview with the modified image
-    imagePreview.src = modifiedImage;
+  //load logo image prev with default font
+  const imagePreview = document.querySelector("#imagePreview").src;
+  const newDate = new Date().toISOString().split("T")[0];
+  addTimestamp(imagePreview, newDate, defaultFont).then((modifiedImage) => {
+    document.querySelector("#imagePreview").src = modifiedImage;
   });
-  
+
+  //   document.querySelector("#fontSelector").addEventListener("change", () => {
+
+  //     //reapply timestamp with the selected font
+  //     const fontSelector = document.querySelector("#fontSelector");
+  //     let selectedFont = fontSelector.options[fontSelector.selectedIndex].value;
+  //     const imagePreview = document.querySelector("#imagePreview").src;
+  //     const newDate = new Date().toISOString().split("T")[0];
+
+  //     addTimestamp(imagePreview, newDate, selectedFont).then((modifiedImage) => {
+  //       document.querySelector("#imagePreview").src = modifiedImage;
+  //     });
+  //   });
+
+  // Event listener for font selection change
+  document
+    .querySelector("#fontSelector")
+    .addEventListener("change", async () => {
+      const fontSelector = document.querySelector("#fontSelector");
+      const selectedFont =
+        fontSelector.options[fontSelector.selectedIndex].value;
+      const imagePreview = document.querySelector("#imagePreview");
+
+      // Reapply timestamp with the selected font
+      const newDate = new Date().toISOString().split("T")[0];
+      const modifiedImage = await addTimestamp(
+        imagePreview.src,
+        newDate,
+        selectedFont,
+      );
+
+      // Update image preview with the modified image
+      imagePreview.src = modifiedImage;
+    });
 }
 
 initializeComponent();

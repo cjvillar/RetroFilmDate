@@ -1,31 +1,22 @@
+@import "https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap";
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
   color: #ffffffde;
-  background-color: #242424;
+  background-color: #7c7777;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.kodak-text {
-  font-family: Arial, sans-serif;
-  font-size: 48px;
-  font-weight: 700;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #fdd000, #e00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 a {
-  font-weight: 500;
-  color: #646cff;
+  font-weight: 700;
+  color: #e7e7f0;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #6c6d7b;
 }
 body {
   margin: 0;
@@ -44,8 +35,8 @@ img {
 }
 @media (min-width: 500px) {
   img {
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: auto;
   }
 }
 @media (max-width: 767px) {
