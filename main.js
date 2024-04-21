@@ -88,7 +88,7 @@ function initializeComponent() {
         </div>
         <div>
             <h3>Image Preview</h3>
-            <img id="imagePreview" src="logo.jpg" alt="Preview">
+            <img id="imagePreview" src="./logo.jpg" alt="Preview">
         </div>
     `;
 
