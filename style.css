@@ -27,6 +27,21 @@ a:hover {
   color: #6c6d7b;
 }
 
+div {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+p {
+  display: inline-block;
+  margin: 10px;
+}
+
+#imageInput {
+  display: block;
+  margin: 0 auto;
+}
+
 body {
   margin: 0;
   display: flex;
