@@ -1,13 +1,12 @@
 # [RetroFilmDate](https://www.cjvillarreal.com/RetroFilmDate/)
 
-
-<img src="site_prev.png" alt="prev of site" width="430" height="472">
-
+<img src="site_prev.jpg" alt="prev of site" width="430" height="472">
 
 RetroFilmDate brings back the glow date stamp of old cameras:
 
-![Site Preview](date_stamp.png)
+More font stlyes and features soon.
 
+![Site Preview](date_stamp.jpg)
 
 ```bash
 npm run dev: Start the development server.

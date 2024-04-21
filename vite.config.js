@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [],
   base: "/RetroFilmDate/",
   build: {
-    outDir: 'dist', 
+    outDir: "dist",
   },
 });

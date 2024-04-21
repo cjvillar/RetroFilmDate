@@ -1,11 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #7c7777;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,27 +18,13 @@
   src: url("./fonts/alarm clock.ttf") format("truetype");
 } */
 
-.kodak-text {
-  font-family: Arial, sans-serif; /* Choose a font similar to the Kodak logo */
-  font-size: 48px; /* Adjust size as needed */
-  font-weight: bold;
-  text-transform: uppercase; /* Make text uppercase like the logo */
-  background: linear-gradient(
-    90deg,
-    #fdd000,
-    #ee0000
-  ); /* Use a linear gradient with Kodak's yellow to red color */
-  -webkit-background-clip: text; /* Clip the background to the text */
-  -webkit-text-fill-color: transparent; /* Make the text transparent */
-}
-
 a {
-  font-weight: 500;
-  color: #646cff;
+  font-weight: 700;
+  color: #e7e7f0;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #6c6d7b;
 }
 
 body {
@@ -64,8 +50,8 @@ img {
 /* if image is bigger, set it to 1000x1000 */
 @media (min-width: 500px) {
   img {
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: auto;
   }
 }
 
