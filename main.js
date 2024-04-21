@@ -1,5 +1,6 @@
 import "./style.css";
 import { createCanvas, loadImage } from "canvas";
+import example from '/example.png'
 
 async function handleImageUpload(event) {
   const file = event.target.files[0];
@@ -88,7 +89,7 @@ function initializeComponent() {
         </div>
         <div>
             <h3>Image Preview</h3>
-            <img id="imagePreview" src="./logo.png" alt="Preview">
+            <img id="imagePreview" src="${example}" alt="Preview">
         </div>
     `;
 
