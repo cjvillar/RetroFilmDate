@@ -11,6 +11,6 @@
         </div>
         <div>
             <h3>Image Preview</h3>
-            <img id="imagePreview" src="./logo.jpg" alt="Preview">
+            <img id="imagePreview" src="logo.png" alt="Preview">
         </div>
     `;document.querySelector("#app").innerHTML=a,document.querySelector("#imageInput").addEventListener("change",p);const o="./fonts/alarmClock.ttf",r=document.querySelector("#fontSelector");for(let e=0;e<r.options.length;e++)if(r.options[e].value===o){r.selectedIndex=e;break}const n=document.querySelector("#imagePreview").src,t=new Date().toISOString().split("T")[0];u(n,t,o).then(e=>{document.querySelector("#imagePreview").src=e}),document.querySelector("#fontSelector").addEventListener("change",async()=>{const e=document.querySelector("#fontSelector"),i=e.options[e.selectedIndex].value,l=document.querySelector("#imagePreview"),c=new Date().toISOString().split("T")[0],s=await u(l.src,c,i);l.src=s})}w();
