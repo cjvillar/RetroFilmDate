@@ -13,7 +13,7 @@ async function handleImageUpload(event) {
     const originalName = file.name;
 
     let selectedFont = fontSelector.options[fontSelector.selectedIndex].value;
-    const modifiedImage = await addTimestamp(image, newDate, selectedFont); // pass image data URL instead of file
+    const modifiedImage = await addTimestamp(image, selectedFont); // pass image data URL instead of file
 
     // preview image
     const preview = document.querySelector("#imagePreview");
@@ -34,17 +34,19 @@ async function handleImageUpload(event) {
 async function addTimestamp(imageDataUrl, selectedFont) {
   const image = await loadImage(imageDataUrl);
   const canvas = createCanvas(image.width, image.height);
-
   const ctx = canvas.getContext("2d");
+  const defaultFont = "./fonts/alarmClock.ttf";
 
-  const font = new FontFace("SelectedFont", `url(${selectedFont})`);
+  const fontUrl = selectedFont ? selectedFont : defaultFont;
+
+  const font = new FontFace("SelectedFont", `url(${fontUrl})`);
   await font.load();
   document.fonts.add(font);
 
   ctx.drawImage(image, 0, 0, image.width, image.height);
 
   // set font for text
-  ctx.font = "70px SelectedFont"; // Use the dynamically loaded font here
+  ctx.font = "70px SelectedFont"; //dynamically loaded font
 
   const dtObject = new Date();
   const formattedDate = dtObject.toLocaleDateString("en-US", {
@@ -58,13 +60,13 @@ async function addTimestamp(imageDataUrl, selectedFont) {
   ctx.textBaseline = "bottom";
   ctx.textAlign = "right";
 
-  //  shadow effect
+  //shadow effect
   ctx.shadowColor = "#ff1e0a";
   ctx.shadowBlur = 10;
 
   ctx.fillText(formattedDate, canvas.width - 50, canvas.height - 50);
 
-  // reset shadow
+  //reset shadow
   ctx.shadowColor = "transparent";
 
   // convert to data URL
@@ -75,21 +77,25 @@ async function addTimestamp(imageDataUrl, selectedFont) {
 
 function initializeComponent() {
   const template = `
-        <div>
+       <div>
         <h1 class="">Retro Date Stamp</h1>
-            <input type="file" id="imageInput" accept="image/jpeg, image/jpg, image/JPG">
-            <label for="fontSelector">Select Font:</label>
-            <select id="fontSelector">
-              <option value="${Segment}">Segment</option>
-              <option value="${SixFour}">Digital64</option>
-             
-            </select>
-            <a id="downloadBtn" disabled>Download</a>
-        </div>
+        <p>1. Pick Date Stamp Font</p>
+        <label for="fontSelector"></label>
+        <select id="fontSelector">
+            <option value="${Segment}">Segment</option>
+            <option value="${SixFour}">Digital64</option>
+        </select>
         <div>
-            <h3>Image Preview</h3>
-            <img id="imagePreview" src="${example}" alt="Preview">
+        <label for="files" class="btn">2. Upload JPEG</label>
+        <input type="file" id="imageInput" accept="image/jpeg, image/jpg, image/JPG">
         </div>
+        <a id="downloadBtn" disabled>3. Download</a>
+    </div>
+    <div>
+        <h3>Image Preview</h3>
+        <img id="imagePreview" src="${example}" alt="Preview">
+       
+    </div>
     `;
 
   document.querySelector("#app").innerHTML = template;
@@ -98,84 +104,29 @@ function initializeComponent() {
     .querySelector("#imageInput")
     .addEventListener("change", handleImageUpload);
 
-  //set initial value for font selector
-  const defaultFont = "./fonts/alarmClock.ttf"; //default font
-  const fontSelector = document.querySelector("#fontSelector");
-  for (let i = 0; i < fontSelector.options.length; i++) {
-    if (fontSelector.options[i].value === defaultFont) {
-      fontSelector.selectedIndex = i;
-      break;
-    }
-  }
-
-  //load logo image prev with default font
-  //   const imagePreview = document.querySelector("#imagePreview").src;
-  //   const newDate = new Date().toISOString().split("T")[0];
-  //   addTimestamp(imagePreview, newDate, defaultFont).then((modifiedImage) => {
-  //     document.querySelector("#imagePreview").src = modifiedImage;
-  //   });
-  const imagePreview = document.querySelector("#imagePreview");
-
-  // Create a new Image object
+  //new Image object
   const image = new Image();
   image.onload = async function () {
-    // Once the image is loaded, call addTimestamp
-    const modifiedImage = await addTimestamp(image.src, defaultFont);
-    // Update the image preview with the modified image
+    //call addTimestamp
+    const modifiedImage = await addTimestamp(image.src);
+    //update the image preview
     imagePreview.src = modifiedImage;
   };
-  // Set the src attribute of the Image object
+
   image.src = imagePreview.src;
 
   document.querySelector("#fontSelector").addEventListener("change", () => {
     //reapply timestamp with the selected font
     const fontSelector = document.querySelector("#fontSelector");
     let selectedFont = fontSelector.options[fontSelector.selectedIndex].value;
-    const imagePreview = document.querySelector("#imagePreview").src;
-    const newDate = new Date().toISOString().split("T")[0];
+    let imagePreview = document.querySelector("#imagePreview").src;
+
+    imagePreview = image.src; //apply the stamp to img
 
     addTimestamp(imagePreview, selectedFont).then((modifiedImage) => {
       document.querySelector("#imagePreview").src = modifiedImage;
     });
   });
-
-  // Event listener for font selection change
-  //   document
-  //     .querySelector("#fontSelector")
-  //     .addEventListener("change", async () => {
-  //       const fontSelector = document.querySelector("#fontSelector");
-  //       const selectedFont =
-  //         fontSelector.options[fontSelector.selectedIndex].value;
-  //       const imagePreview = document.querySelector("#imagePreview");
-
-  //       // Reapply timestamp with the selected font
-  //       const newDate = new Date().toISOString().split("T")[0];
-  //       const modifiedImage = await addTimestamp(
-  //         imagePreview.src,
-  //         newDate,
-  //         selectedFont,
-  //       );
-
-  //       // Update image preview with the modified image
-  //       imagePreview.src = modifiedImage;
-  //     });
-  // Event listener for font selection change
-
-  document
-    .querySelector("#fontSelector")
-    .addEventListener("change", async () => {
-      const fontSelector = document.querySelector("#fontSelector");
-      const selectedFont =
-        fontSelector.options[fontSelector.selectedIndex].value;
-      const imagePreview = document.querySelector("#imagePreview");
-
-      // Reload the image with the selected font
-
-      const modifiedImage = await addTimestamp(imagePreview.src, selectedFont);
-
-      // Update image preview with the modified image
-      imagePreview.src = modifiedImage;
-    });
 }
 
 initializeComponent();
