@@ -1,6 +1,7 @@
 import "./style.css";
 import { createCanvas, loadImage } from "canvas";
-import example from '/example.png'
+import example from '/example.png';
+import Segment from '/fonts/alarmClock.ttf';
 
 async function handleImageUpload(event) {
   const file = event.target.files[0];
@@ -82,7 +83,7 @@ function initializeComponent() {
             <input type="file" id="imageInput" accept="image/jpeg, image/jpg, image/JPG">
             <label for="fontSelector">Select Font:</label>
             <select id="fontSelector">
-              <option value="./fonts/alarmClock.ttf">Segment</option>
+              <option value="${Segment}">Segment</option>
              
             </select>
             <a id="downloadBtn" disabled>Download</a>
