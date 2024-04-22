@@ -3,6 +3,7 @@ import { createCanvas, loadImage } from "canvas";
 import example from "/example.png";
 import Segment from "/fonts/alarmClock.ttf";
 import SixFour from "/fonts/sixtyfour.ttf";
+import Beba from "/fonts/BebasNeue.ttf"
 
 async function handleImageUpload(event) {
   const file = event.target.files[0];
@@ -84,6 +85,7 @@ function initializeComponent() {
         <select id="fontSelector">
             <option value="${Segment}">Segment</option>
             <option value="${SixFour}">Digital64</option>
+            <option value="${Beba}">2000's</option>
         </select>
         <div>
         <label for="files" class="btn">2. Upload JPEG</label>
