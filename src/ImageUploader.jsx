@@ -3,9 +3,11 @@ import React from "react";
 const ImageUploader = ({ onUpload }) => {
   return (
     <div>
-      <label htmlFor="imageInput" className="btn">
-        2. Upload JPEG
-      </label>
+      <h3>Upload jpeg files: </h3>
+      {/* <label htmlFor="imageInput" className="btn">
+        Upload jpeg files:
+      </label> */}
+      <div></div>
       <input
         type="file"
         id="imageInput"
