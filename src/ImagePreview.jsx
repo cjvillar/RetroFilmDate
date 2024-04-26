@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { addTimestamp } from "./utils";
-import "./index.css";
 import Segment from "./assets/fonts/alarmClock.ttf";
 import SixFour from "./assets/fonts/sixtyfour.ttf";
 import Bebas from "./assets/fonts/BebasNeue.ttf";
@@ -60,22 +59,19 @@ const ImagePreview = ({ modifiedImage }) => {
   };
 
   return (
-    <div>
+    <div className=".preview">
       {Array.isArray(previewImages) &&
         previewImages.map((imageUrl, index) => (
           <div key={index}>
-            <img
-              src={imageUrl}
-              alt={`Preview ${index}`}
-              style={{ width: "90%", margin: "30px" }}
-            />
+            <img src={imageUrl} alt={`Preview ${index}`} />
+            <br></br>
             <button
               className="btn"
               onClick={() => handleDownload(imageUrl, `image_${index}.jpg`)}
             >
               Download
             </button>
-            <br />
+            <p>|</p>
             <select
               id={`fontSelector_${index}`}
               value={selectedFonts[index]}
@@ -85,6 +81,7 @@ const ImagePreview = ({ modifiedImage }) => {
               <option value={SixFour}>Digital64</option>
               <option value={Bebas}>2000's</option>
             </select>
+            <p>|</p>
             <select
               id={`dateFormatSelector_${index}`}
               value={dateFormats[index]}
@@ -93,6 +90,7 @@ const ImagePreview = ({ modifiedImage }) => {
               <option value="US">US</option>
               <option value="UK">UK</option>
             </select>
+            <p>|</p>
             <input
               id={`customDateInput_${index}`}
               type="date"

@@ -4,6 +4,7 @@ import { handleImageUpload } from "./utils.js";
 import ImageUploader from "./ImageUploader.jsx";
 import ImagePreview from "./ImagePreview.jsx";
 import ExampleImage from "./ExampleImage.jsx";
+import Header from "./Header";
 
 const App = () => {
   const [modifiedImages, setModifiedImages] = useState([]);
@@ -14,7 +15,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1 className="">Retro Date Stamp</h1>
+      <Header />
       <ImageUploader onUpload={handleUpload} />
       {modifiedImages.length === 0 && <ExampleImage />}
       <ImagePreview modifiedImage={modifiedImages} />
