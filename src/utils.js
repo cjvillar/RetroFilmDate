@@ -1,8 +1,6 @@
 import { createCanvas, loadImage } from "canvas";
 
 import Segment from "./assets/fonts/alarmClock.ttf";
-// import SixFour from "./assets/fonts/sixtyfour.ttf";
-// import Beba from "./assets/fonts/BebasNeue.ttf";
 
 const addTimestamp = async (
   imageDataUrl,
@@ -59,9 +57,6 @@ const handleImageUpload = async (
   event,
   currentImages = [],
   setModifiedImages,
-  selectedFont,
-  customDate,
-  dateFormat,
 ) => {
   const files = event.target.files;
   const modifiedImagesArray = Array.isArray(currentImages)
@@ -72,13 +67,6 @@ const handleImageUpload = async (
 
     try {
       const imageDataUrl = URL.createObjectURL(file);
-      // const modifiedImageUrl = await addTimestamp(
-      //   imageDataUrl,
-      //   selectedFont,
-      //   customDate,
-      //   dateFormat
-      // );
-      //modifiedImagesArray.push(modifiedImageUrl);
       modifiedImagesArray.push(imageDataUrl);
     } catch (error) {
       console.error("Error adding timestamp:", error);
