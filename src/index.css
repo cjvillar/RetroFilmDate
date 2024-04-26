@@ -1,15 +1,23 @@
-@import "https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap";
 :root {
+  @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
   line-height: 1.5;
   font-weight: 400;
+
   color-scheme: light dark;
-  color: #ffffffde;
+  color: rgba(255, 255, 255, 0.87);
   background-color: #7c7777;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* @font-face {
+    font-family: "AlarmClock";
+    src: url("./fonts/alarm clock.ttf") format("truetype");
+  } */
+
 a {
   font-weight: 700;
   color: #e7e7f0;
@@ -18,18 +26,22 @@ a {
 a:hover {
   color: #6c6d7b;
 }
+
 div {
   text-align: center;
   margin-bottom: 20px;
 }
+
 p {
   display: inline-block;
   margin: 10px;
 }
+
 #imageInput {
   display: block;
   margin: 0 auto;
 }
+
 body {
   margin: 0;
   display: flex;
@@ -37,36 +49,45 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
 img {
   box-shadow:
-    #32325d40 0 13px 27px -5px,
-    #0000004d 0 8px 16px -8px;
+    rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
+
+/* if image is bigger, set it to 1000x1000 */
 @media (min-width: 500px) {
   img {
-    width: 100%;
+    width: 90%;
     height: auto;
   }
 }
+
+/* smaller screens, make the image responsive */
 @media (max-width: 767px) {
   img {
     width: 100%;
     height: auto;
   }
 }
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
+
 .card {
   padding: 2em;
 }
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -78,6 +99,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
