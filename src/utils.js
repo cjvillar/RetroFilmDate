@@ -1,8 +1,8 @@
 import { createCanvas, loadImage } from "canvas";
 
 import Segment from "./assets/fonts/alarmClock.ttf";
-import SixFour from "./assets/fonts/sixtyfour.ttf";
-import Beba from "./assets/fonts/BebasNeue.ttf";
+// import SixFour from "./assets/fonts/sixtyfour.ttf";
+// import Beba from "./assets/fonts/BebasNeue.ttf";
 
 const addTimestamp = async (
   imageDataUrl,
@@ -24,7 +24,7 @@ const addTimestamp = async (
   await font.load();
   document.fonts.add(font);
 
-  // customize date format based on selected option
+  // custom date format
   let dtObject = customDate ? new Date(customDate) : new Date();
   let formattedDate = formatDate(dtObject, dateFormat);
 

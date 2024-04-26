@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { addTimestamp, formatDate } from "./utils";
+import { addTimestamp } from "./utils";
 import "./index.css";
 import Segment from "./assets/fonts/alarmClock.ttf";
 import SixFour from "./assets/fonts/sixtyfour.ttf";
@@ -47,13 +47,11 @@ const ImagePreview = ({ modifiedImage }) => {
     setReloadImage(!reloadImage);
   };
 
-  // format selection change
   const handleDateFormatChange = (e) => {
     setDateFormat(e.target.value);
     setReloadImage(!reloadImage);
   };
 
-  //  custom date input change
   const handleCustomDateChange = (e) => {
     setCustomDate(e.target.value);
     setReloadImage(!reloadImage);
