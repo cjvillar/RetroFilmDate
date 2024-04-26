@@ -12,14 +12,22 @@ const App = () => {
     await handleImageUpload(event, modifiedImages, setModifiedImages);
   };
 
-  useEffect(() => {
-    async function addTimestampAndSetModifiedImage() {
-      const blob = await fetch(example).then((res) => res.blob());
-      const timestampedExample = await addTimestamp(blob);
-      setModifiedImages(timestampedExample);
-    }
-    addTimestampAndSetModifiedImage();
-  }, []);
+  // useEffect(() => {
+  //   async function addTimestampAndSetModifiedImage() {
+  //     const blob = await fetch(example).then((res) => res.blob());
+  //     const timestampedExample = await addTimestamp(blob);
+  //     setModifiedImages(timestampedExample);
+  //   }
+  //   addTimestampAndSetModifiedImage();
+  // }, []);
+
+  // useEffect(() => {
+  //   async function addTimestampAndSetModifiedImage() {
+  //     const timestampedExample = await addTimestamp();
+  //     setModifiedImages(timestampedExample);
+  //   }
+  //   addTimestampAndSetModifiedImage();
+  // }, []);
 
   return (
     <div className="app">
@@ -32,3 +40,4 @@ const App = () => {
 
 export default App;
 
+App.js;

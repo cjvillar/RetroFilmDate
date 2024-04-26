@@ -1,23 +1,26 @@
 import { createCanvas, loadImage } from "canvas";
 
-import Segment from "/fonts/alarmClock.ttf";
-import SixFour from "/fonts/sixtyfour.ttf";
-import Beba from "/fonts/BebasNeue.ttf";
+import Segment from "./assets/fonts/alarmClock.ttf";
+import SixFour from "./assets/fonts/sixtyfour.ttf";
+import Beba from "./assets/fonts/BebasNeue.ttf";
 
-//add time stamp func
-const addTimestamp = async (file, selectedFont, customDate, dateFormat) => {
-  const imageDataUrl = URL.createObjectURL(file);
+const addTimestamp = async (
+  imageDataUrl,
+  selectedFont,
+  customDate,
+  dateFormat,
+) => {
   const image = await loadImage(imageDataUrl);
   const canvas = createCanvas(image.width, image.height);
   const ctx = canvas.getContext("2d");
 
   ctx.drawImage(image, 0, 0, image.width, image.height);
 
-  const defaultFont = "./fonts/alarmClock.ttf";
-
+  const defaultFont = Segment;
   const fontUrl = selectedFont ? selectedFont : defaultFont;
-  //const fontUrl = selectedFont || "./fonts/alarmClock.ttf";
+
   const font = new FontFace("SelectedFont", `url(${fontUrl})`);
+
   await font.load();
   document.fonts.add(font);
 
@@ -25,20 +28,16 @@ const addTimestamp = async (file, selectedFont, customDate, dateFormat) => {
   let dtObject = customDate ? new Date(customDate) : new Date();
   let formattedDate = formatDate(dtObject, dateFormat);
 
-
   ctx.font = "70px SelectedFont";
   ctx.fillStyle = "#ff8201";
   ctx.textBaseline = "bottom";
   ctx.textAlign = "right";
 
-
   ctx.fillText(formattedDate, canvas.width - 50, canvas.height - 50);
-
 
   const dataUrl = canvas.toDataURL("image/jpeg");
   return dataUrl;
 };
-
 
 const formatDate = (dateObject, dateFormat) => {
   const options = {
@@ -60,6 +59,9 @@ const handleImageUpload = async (
   event,
   currentImages = [],
   setModifiedImages,
+  selectedFont,
+  customDate,
+  dateFormat,
 ) => {
   const files = event.target.files;
   const modifiedImagesArray = Array.isArray(currentImages)
@@ -68,21 +70,18 @@ const handleImageUpload = async (
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
 
-    const selectedFont = "./fonts/alarmClock.ttf"; // font path
-    const dateFormat = "US"; // default date format 
-
     try {
-      const modifiedImageUrl = await addTimestamp(
-        file,
-        selectedFont,
-        null, // customDate null for current date
-        dateFormat,
-      );
-      modifiedImagesArray.push(modifiedImageUrl);
-      
+      const imageDataUrl = URL.createObjectURL(file);
+      // const modifiedImageUrl = await addTimestamp(
+      //   imageDataUrl,
+      //   selectedFont,
+      //   customDate,
+      //   dateFormat
+      // );
+      //modifiedImagesArray.push(modifiedImageUrl);
+      modifiedImagesArray.push(imageDataUrl);
     } catch (error) {
       console.error("Error adding timestamp:", error);
-    
     }
   }
   setModifiedImages(modifiedImagesArray);
