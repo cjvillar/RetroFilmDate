@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { addTimestamp } from "./utils";
+import { addTimestamp, addGrainyEffect, adjustImageColor } from "./utils";
 import Segment from "./assets/fonts/alarmClock.ttf";
 import SixFour from "./assets/fonts/sixtyfour.ttf";
 import Bebas from "./assets/fonts/BebasNeue.ttf";
@@ -9,17 +9,41 @@ const ImagePreview = ({ modifiedImage }) => {
   const [dateFormats, setDateFormats] = useState([]);
   const [customDates, setCustomDates] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
+  const [grainyIntensities, setGrainyIntensities] = useState([]);
+  const [colorAdjustmentIntensities, setColorAdjustmentIntensities] = useState(
+    [],
+  );
 
   useEffect(() => {
     updatePreviewImages();
-  }, [modifiedImage, selectedFonts, dateFormats, customDates]);
+  }, [
+    modifiedImage,
+    selectedFonts,
+    dateFormats,
+    customDates,
+    grainyIntensities,
+    colorAdjustmentIntensities,
+  ]);
 
   const updatePreviewImages = async () => {
     try {
       const updatedImages = await Promise.all(
         modifiedImage.map(async (imageUrl, index) => {
-          const modifiedImageUrl = await addTimestamp(
+          // apply grainy effect
+          let modifiedImageUrl = await addGrainyEffect(
             imageUrl,
+            grainyIntensities[index],
+          );
+
+          // apply color adjustment
+          modifiedImageUrl = await adjustImageColor(
+            modifiedImageUrl,
+            colorAdjustmentIntensities[index],
+          );
+
+          //timestamp
+          modifiedImageUrl = await addTimestamp(
+            modifiedImageUrl,
             selectedFonts[index] || Segment, //default font
             customDates[index],
             dateFormats[index] || "US", //default date format
@@ -56,6 +80,18 @@ const ImagePreview = ({ modifiedImage }) => {
     const newCustomDates = [...customDates];
     newCustomDates[index] = e.target.value;
     setCustomDates(newCustomDates);
+  };
+
+  const handleGrainyIntensityChange = (e, index) => {
+    const newIntensities = [...grainyIntensities];
+    newIntensities[index] = parseInt(e.target.value); // convert value to int
+    setGrainyIntensities(newIntensities);
+  };
+
+  const handleColorAdjustmentIntensityChange = (e, index) => {
+    const newIntensities = [...colorAdjustmentIntensities];
+    newIntensities[index] = parseInt(e.target.value); // convert value to int
+    setColorAdjustmentIntensities(newIntensities);
   };
 
   return (
@@ -97,6 +133,26 @@ const ImagePreview = ({ modifiedImage }) => {
               value={customDates[index] || ""}
               onChange={(e) => handleCustomDateChange(e, index)}
             />
+            <p>|</p>
+            <input
+              id={`grainyIntensityInput_${index}`}
+              type="range"
+              value={grainyIntensities[index] || "0"}
+              onChange={(e) => handleGrainyIntensityChange(e, index)}
+              min="0"
+              max="50"
+            />
+            <p>Grain</p>
+            <p>|</p>
+            <input
+              id={`colorAdjustmentIntensityInput_${index}`}
+              type="range"
+              value={colorAdjustmentIntensities[index] || "0"}
+              onChange={(e) => handleColorAdjustmentIntensityChange(e, index)}
+              min="0"
+              max="100"
+            />
+            <p>Color</p>
           </div>
         ))}
     </div>

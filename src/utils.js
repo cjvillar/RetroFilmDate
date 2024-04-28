@@ -75,4 +75,76 @@ const handleImageUpload = async (
   setModifiedImages(modifiedImagesArray);
 };
 
-export { addTimestamp, formatDate, handleImageUpload };
+const adjustImageColor = async (imageUrl, intensity) => {
+  const image = new Image();
+  const loadImage = new Promise((resolve, reject) => {
+    image.onload = () => resolve();
+    image.onerror = (error) => reject(error);
+  });
+
+  image.src = imageUrl;
+  await loadImage;
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = image.width;
+  canvas.height = image.height;
+  ctx.drawImage(image, 0, 0);
+
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  const data = imageData.data;
+  for (let i = 0; i < data.length; i += 4) {
+    data[i + 1] += intensity;
+    data[i + 2] += intensity;
+    data[i + 3] -= intensity;
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+
+  const modifiedImageUrl = canvas.toDataURL("image/jpeg");
+  return modifiedImageUrl;
+};
+
+const addGrainyEffect = async (imageUrl, intensity) => {
+  const image = new Image();
+  //image.crossOrigin = "anonymous";
+  const loadImage = new Promise((resolve, reject) => {
+    image.onload = () => resolve();
+    image.onerror = (error) => reject(error);
+  });
+
+  image.src = imageUrl;
+  await loadImage;
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = image.width;
+  canvas.height = image.height;
+  ctx.drawImage(image, 0, 0);
+
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  const data = imageData.data;
+  for (let i = 0; i < data.length; i += 4) {
+    const randomR = Math.random() * intensity * 2 - intensity;
+    const randomG = Math.random() * intensity * 2 - intensity;
+    const randomB = Math.random() * intensity * 2 - intensity;
+    data[i] += randomR; // R
+    data[i + 1] += randomG; // G
+    data[i + 2] += randomB; // B
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+
+  const modifiedImageUrl = canvas.toDataURL("image/jpeg");
+  return modifiedImageUrl;
+};
+
+export {
+  addTimestamp,
+  formatDate,
+  handleImageUpload,
+  adjustImageColor,
+  addGrainyEffect,
+};
